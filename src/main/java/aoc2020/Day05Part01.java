@@ -26,5 +26,4 @@ public class Day05Part01 extends AdventOfCode {
     public static void main(String[] args) {
         System.out.println("Answer: " + solve());
     }
-
 }

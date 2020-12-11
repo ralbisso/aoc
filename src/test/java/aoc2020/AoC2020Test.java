@@ -55,4 +55,14 @@ public class AoC2020Test {
     public void day05Part02Test() {
         assertEquals(539, Day05Part02.solve());
     }
+
+    @Test
+    public void day06Part01Test() {
+        assertEquals(6686, Day06Part01.solve());
+    }
+
+    @Test
+    public void day06Part02Test() {
+        assertEquals(3476, Day06Part02.solve());
+    }
 }
