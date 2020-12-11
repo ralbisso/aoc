@@ -9,12 +9,8 @@ import utils.FileConstants;
 
 public class Day05Part02 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<String> seats = getData(FileConstants.AOC_2020_05);
-
-        // Problem solving
         Set<Integer> seatIDs = new TreeSet<>();
         for (String seat : seats) {
             String binaryRow = seat.substring(0, 7).replaceAll("F", "0").replaceAll("B", "1");
@@ -30,6 +26,10 @@ public class Day05Part02 extends AdventOfCode {
                 break;
             }
         }
-        System.out.println("Answer: " + mySeat);
+        return mySeat;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
     }
 }

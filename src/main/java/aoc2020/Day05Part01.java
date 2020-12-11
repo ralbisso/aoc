@@ -7,12 +7,8 @@ import utils.FileConstants;
 
 public class Day05Part01 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<String> seats = getData(FileConstants.AOC_2020_05);
-
-        // Problem solving
         int highest = 0;
         for (String seat : seats) {
             String binaryRow = seat.substring(0, 7).replaceAll("F", "0").replaceAll("B", "1");
@@ -24,7 +20,11 @@ public class Day05Part01 extends AdventOfCode {
                 highest = seatID;
             }
         }
-        System.out.println("Answer: " + highest);
+        return highest;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
     }
 
 }
