@@ -9,12 +9,8 @@ import utils.FileConstants;
 
 public class Day08Part02 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<String> instructions = getData(FileConstants.AOC_2020_08);
-
-        // Problem solving
         int accumulator = 0;
         for (int i = 0; i < instructions.size(); i++) {
             while (instructions.get(i).startsWith("acc")) {
@@ -44,7 +40,7 @@ public class Day08Part02 extends AdventOfCode {
             accumulator = 0;
             swap(instructions, i);
         }
-        System.out.println("Answer: " + accumulator);
+        return accumulator;
     }
 
     private static void swap(List<String> list, int index) {
@@ -57,4 +53,7 @@ public class Day08Part02 extends AdventOfCode {
         list.set(index, replace);
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }

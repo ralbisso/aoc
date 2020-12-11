@@ -9,12 +9,8 @@ import utils.FileConstants;
 
 public class Day08Part01 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<String> instructions = getData(FileConstants.AOC_2020_08);
-
-        // Problem solving
         int accumulator = 0;
         Set<String> history = new HashSet<>();
         for (int i = 0; i < instructions.size(); i++) {
@@ -31,7 +27,10 @@ public class Day08Part01 extends AdventOfCode {
                 i += value - 1;
             }
         }
-        System.out.println("Answer: " + accumulator);
+        return accumulator;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
