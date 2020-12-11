@@ -8,12 +8,8 @@ import utils.FileConstants;
 
 public class Day10Part01 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<Integer> adapters = getIntData(FileConstants.AOC_2020_10);
-
-        // Problem solving
         adapters.add(0);
         adapters.sort(Comparator.naturalOrder());
         int jolts1 = 0;
@@ -27,7 +23,10 @@ public class Day10Part01 extends AdventOfCode {
             }
         }
         jolts3++;
-        System.out.println("Answer: " + (jolts1 * jolts3));
+        return jolts1 * jolts3;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }

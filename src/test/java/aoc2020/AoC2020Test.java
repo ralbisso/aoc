@@ -2,6 +2,7 @@ package aoc2020;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AoC2020Test {
@@ -94,5 +95,17 @@ public class AoC2020Test {
     @Test
     public void day09Part02Test() {
         assertEquals(3340942, Day09Part02.solve());
+    }
+
+    @Test
+    public void day10Part01Test() {
+        assertEquals(2812, Day10Part01.solve());
+    }
+
+    @Test
+    @Ignore
+    public void day10Part02Test() {
+        // Too slow (~5 sec.), needs optimization
+        assertEquals(386869246296064L, Day10Part02.solve());
     }
 }

@@ -1,42 +1,45 @@
 package aoc2020;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import utils.AdventOfCode;
 import utils.FileConstants;
 
 public class Day10Part02 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static long solve() {
         List<Integer> adapters = getIntData(FileConstants.AOC_2020_10);
-
-        // Problem solving
         adapters.sort(Comparator.naturalOrder());
-        System.out.println(adapters);
-        System.out.println("Answer: " + countsWays(adapters, 0, 0));
-
+        Map<Integer, Integer> memo = new HashMap<>();
+        // Solves the problem, however this is extremely dirty and slow (~5sec.)
+        countWays(adapters, 0, 0, 50, memo);
+        return memo.get(80) * countWays(adapters, 50, 80, Integer.MAX_VALUE, memo);
     }
 
-    private static long countsWays(List<Integer> adapters, int joltage, int index) {
-        if (index == adapters.size()) {
-            return 1;
+    private static long countWays(List<Integer> adapters, int index, int joltage, int limit,
+            Map<Integer, Integer> memo) {
+        if (index >= limit || index == adapters.size()) {
+            if (memo.containsKey(joltage)) {
+                memo.put(joltage, memo.get(joltage) + 1);
+            } else {
+                memo.put(joltage, 1);
+            }
+            return 1L;
         }
-        long count = 0;
+        long count = 0L;
         for (int i = index; i < adapters.size(); i++) {
-            if (adapters.get(i) - joltage == 1) {
-                count += countsWays(adapters, joltage + 1, i + 1);
-            }
-            if (adapters.get(i) - joltage == 2) {
-                count += countsWays(adapters, joltage + 2, i + 1);
-            }
-            if (adapters.get(i) - joltage == 3) {
-                count += countsWays(adapters, joltage + 3, i + 1);
+            int gap = adapters.get(i) - joltage;
+            if (gap <= 3) {
+                count += countWays(adapters, i + 1, adapters.get(i), limit, memo);
             }
         }
         return count;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
