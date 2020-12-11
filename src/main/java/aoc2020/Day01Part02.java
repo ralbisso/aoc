@@ -8,11 +8,7 @@ import utils.FileConstants;
 public class Day01Part02 extends AdventOfCode {
 
     public static int solve() {
-
-        // File processing
         List<Integer> expenses = getIntData(FileConstants.AOC_2020_01);
-
-        // Problem solving
         int product = 0;
         loop: for (int i = 0; i < expenses.size(); i++) {
             for (int j = i + 1; j < expenses.size(); j++) {

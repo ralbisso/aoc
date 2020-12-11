@@ -8,11 +8,7 @@ import utils.FileConstants;
 public class Day02Part02 extends AdventOfCode {
 
     public static int solve() {
-
-        // File processing
         List<String> passwords = getData(FileConstants.AOC_2020_02);
-
-        // Problem solving
         int validPasswordsCount = 0;
         for (String password : passwords) {
             String[] split = password.split(" ");

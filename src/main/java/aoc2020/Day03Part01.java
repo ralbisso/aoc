@@ -7,12 +7,8 @@ import utils.FileConstants;
 
 public class Day03Part01 extends AdventOfCode {
 
-    public static void main(String[] args) {
-
-        // File processing
+    public static int solve() {
         List<String> grid = getData(FileConstants.AOC_2020_03);
-
-        // Problem solving
         int treesCount = 0, index = 0;
         for (String row : grid) {
             while (row.length() <= index) {
@@ -23,7 +19,10 @@ public class Day03Part01 extends AdventOfCode {
             }
             index += 3;
         }
-        System.out.println("Answer: " + treesCount);
+        return treesCount;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
