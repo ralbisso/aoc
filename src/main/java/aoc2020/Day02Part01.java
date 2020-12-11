@@ -7,7 +7,7 @@ import utils.FileConstants;
 
 public class Day02Part01 extends AdventOfCode {
 
-    public static void main(String[] args) {
+    public static int solve() {
 
         // File processing
         List<String> passwords = getData(FileConstants.AOC_2020_02);
@@ -25,7 +25,7 @@ public class Day02Part01 extends AdventOfCode {
                 validPasswordsCount++;
             }
         }
-        System.out.println("Answer: " + validPasswordsCount);
+        return validPasswordsCount;
     }
 
     private static boolean isPasswordValid(int lower, int upper, char letter, String toCheck) {
@@ -33,4 +33,7 @@ public class Day02Part01 extends AdventOfCode {
         return count >= lower && count <= upper;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
