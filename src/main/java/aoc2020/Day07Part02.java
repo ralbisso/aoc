@@ -9,14 +9,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import utils.FileConstants;
+
 public class Day07Part02 {
 
-    public static void main(String[] args) {
+    public static int solve() {
+        Map<String, List<String>> bags = getData(FileConstants.AOC_2020_07);
+        return countBag("shiny gold", bags);
+    }
 
-        // File processing
-        Map<String, List<String>> bags = new TreeMap<>();
-        try (BufferedReader br = Files
-                .newBufferedReader(Paths.get("src/main/resources/2020/day07.data"))) {
+    private static Map<String, List<String>> getData(String input) {
+        Map<String, List<String>> data = new TreeMap<>();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(input))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] split = cleanLine(line).split(",");
@@ -28,15 +32,13 @@ public class Day07Part02 {
                     } else {
                         value.add(s.trim());
                     }
-                    bags.put(key, value);
+                    data.put(key, value);
                 }
             }
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
-
-        // Problem solving
-        System.out.println("Answer: " + countBag("shiny gold", bags));
+        return data;
     }
 
     private static String cleanLine(String line) {
@@ -58,4 +60,7 @@ public class Day07Part02 {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
