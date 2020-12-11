@@ -7,7 +7,7 @@ import utils.FileConstants;
 
 public class Day01Part02 extends AdventOfCode {
 
-    public static void main(String[] args) {
+    public static int solve() {
 
         // File processing
         List<Integer> expenses = getIntData(FileConstants.AOC_2020_01);
@@ -24,7 +24,10 @@ public class Day01Part02 extends AdventOfCode {
                 }
             }
         }
-        System.out.println("Answer: " + product);
+        return product;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
