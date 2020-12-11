@@ -1,31 +1,16 @@
 package aoc2020;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class Day09Part01 {
+import utils.AdventOfCode;
+import utils.FileConstants;
 
-    public static void main(String[] args) {
+public class Day09Part01 extends AdventOfCode {
 
-        // File processing
-        List<Long> outputs = new ArrayList<>();
-        try (BufferedReader br = Files
-                .newBufferedReader(Paths.get("src/main/resources/2020/day09.data"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                outputs.add(Long.parseLong(line));
-            }
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
-
-        // Problem solving
+    public static long solve() {
+        List<Long> outputs = getLongData(FileConstants.AOC_2020_09);
         Set<Long> sums = new TreeSet<>();
         int preamble = 25;
         for (int i = 0; i < preamble; i++) {
@@ -49,7 +34,10 @@ public class Day09Part01 {
                 }
             }
         }
-        System.out.println("Answer: " + value);
+        return value;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
