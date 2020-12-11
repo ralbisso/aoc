@@ -13,11 +13,20 @@ import utils.FileConstants;
 
 public class Day04Part01 {
 
-    public static void main(String[] args) {
+    public static int solve() {
+        List<Map<String, String>> passports = getData(FileConstants.AOC_2020_04);
+        int validPassportsCount = 0;
+        for (Map<String, String> passport : passports) {
+            if (isPassportValid(passport)) {
+                validPassportsCount++;
+            }
+        }
+        return validPassportsCount;
+    }
 
-        // File processing
-        List<Map<String, String>> passports = new ArrayList<>();
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(FileConstants.AOC_2020_04))) {
+    private static List<Map<String, String>> getData(String input) {
+        List<Map<String, String>> data = new ArrayList<>();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(input))) {
             String line;
             Map<String, String> passport = new TreeMap<>();
             while ((line = br.readLine()) != null) {
@@ -30,23 +39,15 @@ public class Day04Part01 {
                         passport.put(key, value);
                     }
                 } else {
-                    passports.add(passport);
+                    data.add(passport);
                     passport = new TreeMap<>();
                 }
             }
-            passports.add(passport);
+            data.add(passport);
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
-
-        // Problem solving
-        int validPassportsCount = 0;
-        for (Map<String, String> passport : passports) {
-            if (isPassportValid(passport)) {
-                validPassportsCount++;
-            }
-        }
-        System.out.println("Answer: " + validPassportsCount);
+        return data;
     }
 
     private static boolean isPassportValid(Map<String, String> passport) {
@@ -88,4 +89,7 @@ public class Day04Part01 {
         return true;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
