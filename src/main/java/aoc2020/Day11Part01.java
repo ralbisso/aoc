@@ -1,131 +1,102 @@
 package aoc2020;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day11Part01 {
+import utils.AdventOfCode;
+import utils.FileConstants;
 
-    public static void main(String[] args) {
+public class Day11Part01 extends AdventOfCode {
 
-        // File processing
-        List<String> grid = new ArrayList<>();
-        try (BufferedReader br = Files
-                .newBufferedReader(Paths.get("src/main/resources/2020/day11.data"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                grid.add(line);
-            }
-        } catch (IOException e) {
-            System.err.format("IOException: %s%n", e);
-        }
-
-        // Problem solving
-        System.out.println(grid.size());
-
-        char[][] matrix = new char[97][100];
-        for (int i = 0; i < 97; i++) {
-            for (int j = 0; j < 91; j++) {
-                matrix[i][j] = grid.get(i).charAt(j);
+    public static int solve() {
+        List<String> airport = getData(FileConstants.AOC_2020_11);
+        char[][] seats = new char[airport.size()][airport.get(0).length()];
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[0].length; j++) {
+                seats[i][j] = airport.get(i).charAt(j);
             }
         }
-
         int previous = -1;
-        int current = -1;
-
-        print(matrix);
-        process(matrix);
-        current = count(matrix);
-
+        applySeatingRules(seats);
+        int current = countAllOccupiedSeats(seats);
         while (previous != current) {
-            print(matrix);
-            process(matrix);
             previous = current;
-            current = count(matrix);
+            applySeatingRules(seats);
+            current = countAllOccupiedSeats(seats);
         }
-
-        System.out.println("Answer: " + current);
+        return current;
     }
 
-    private static int count(char[][] matrix) {
-        int occ = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == '#') {
-                    occ++;
-                }
-            }
-        }
-        return occ;
-    }
-
-    private static void print(char[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
-
-    private static int countOcc(char[][] matrix, int i, int j) {
-        int nbOccupied = 0;
-        if (j + 1 < matrix.length && matrix[i][j + 1] == '#') {
-            nbOccupied++;
-        }
-        if (j - 1 >= 0 && matrix[i][j - 1] == '#') {
-            nbOccupied++;
-        }
-        if (i + 1 < matrix.length && matrix[i + 1][j] == '#') {
-            nbOccupied++;
-        }
-        if (i - 1 >= 0 && matrix[i - 1][j] == '#') {
-            nbOccupied++;
-        }
-        if (i + 1 < matrix.length && j + 1 < matrix.length && matrix[i + 1][j + 1] == '#') {
-            nbOccupied++;
-        }
-        if (i - 1 >= 0 && j - 1 >= 0 && matrix[i - 1][j - 1] == '#') {
-            nbOccupied++;
-        }
-        if (i + 1 < matrix.length && j - 1 >= 0 && matrix[i + 1][j - 1] == '#') {
-            nbOccupied++;
-        }
-        if (i - 1 >= 0 && j + 1 < matrix.length && matrix[i - 1][j + 1] == '#') {
-            nbOccupied++;
-        }
-        return nbOccupied;
-    }
-
-    private static void process(char[][] matrix) {
-        List<int[]> toOccupied = new ArrayList<>();
-        List<int[]> toFree = new ArrayList<>();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix.length; j++) {
-                if (matrix[i][j] == 'L') {
-                    int nbOccupied = countOcc(matrix, i, j);
+    private static void applySeatingRules(char[][] seats) {
+        List<int[]> freeToOccupied = new ArrayList<>();
+        List<int[]> occupiedToFree = new ArrayList<>();
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[0].length; j++) {
+                if (seats[i][j] == 'L') {
+                    int nbOccupied = countNearbyOccupiedSeats(seats, i, j);
                     if (nbOccupied == 0) {
                         int[] coord = { i, j };
-                        toOccupied.add(coord);
+                        freeToOccupied.add(coord);
                     }
-                } else if (matrix[i][j] == '#') {
-                    int nbOccupied = countOcc(matrix, i, j);
+                } else if (seats[i][j] == '#') {
+                    int nbOccupied = countNearbyOccupiedSeats(seats, i, j);
                     if (nbOccupied >= 4) {
                         int[] coord = { i, j };
-                        toFree.add(coord);
+                        occupiedToFree.add(coord);
                     }
                 }
             }
         }
-        for (int[] array : toOccupied) {
-            matrix[array[0]][array[1]] = '#';
+        for (int[] array : freeToOccupied) {
+            seats[array[0]][array[1]] = '#';
         }
-        for (int[] array : toFree) {
-            matrix[array[0]][array[1]] = 'L';
+        for (int[] array : occupiedToFree) {
+            seats[array[0]][array[1]] = 'L';
         }
     }
 
+    private static int countNearbyOccupiedSeats(char[][] seats, int i, int j) {
+        int nearbyOccupiedSeats = 0;
+        if (j + 1 < seats[0].length && seats[i][j + 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (j - 1 >= 0 && seats[i][j - 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i + 1 < seats.length && seats[i + 1][j] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i - 1 >= 0 && seats[i - 1][j] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i + 1 < seats.length && j + 1 < seats[0].length && seats[i + 1][j + 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i - 1 >= 0 && j - 1 >= 0 && seats[i - 1][j - 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i + 1 < seats.length && j - 1 >= 0 && seats[i + 1][j - 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        if (i - 1 >= 0 && j + 1 < seats[0].length && seats[i - 1][j + 1] == '#') {
+            nearbyOccupiedSeats++;
+        }
+        return nearbyOccupiedSeats;
+    }
+
+    private static int countAllOccupiedSeats(char[][] seats) {
+        int occupiedSeats = 0;
+        for (int i = 0; i < seats.length; i++) {
+            for (int j = 0; j < seats[0].length; j++) {
+                if (seats[i][j] == '#') {
+                    occupiedSeats++;
+                }
+            }
+        }
+        return occupiedSeats;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }

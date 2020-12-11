@@ -108,4 +108,14 @@ public class AoC2020Test {
         // Too slow (~5 sec.), needs optimization
         assertEquals(386869246296064L, Day10Part02.solve());
     }
+
+    @Test
+    public void day11Part01Test() {
+        assertEquals(2273, Day11Part01.solve());
+    }
+
+    @Test
+    public void day11Part02Test() {
+        assertEquals(2064, Day11Part02.solve());
+    }
 }
