@@ -155,7 +155,9 @@ public class AoC2020Test {
     }
 
     @Test
+    @Ignore
     public void day15Part02Test() {
+        // Too slow (~8 sec.), needs optimization
         assertEquals(548531, Day15Part02.solve());
     }
 
