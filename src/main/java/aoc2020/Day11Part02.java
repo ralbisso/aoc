@@ -9,22 +9,27 @@ import utils.FileConstants;
 public class Day11Part02 extends AdventOfCode {
 
     public static int solve() {
-        List<String> airport = getData(FileConstants.AOC_2020_11);
-        char[][] seats = new char[airport.size()][airport.get(0).length()];
-        for (int i = 0; i < seats.length; i++) {
-            for (int j = 0; j < seats[0].length; j++) {
-                seats[i][j] = airport.get(i).charAt(j);
-            }
-        }
-        int previous = -1;
+        char[][] seats = getMatrixData(FileConstants.AOC_2020_11);
         applySeatingRules(seats);
+        int previous = -1;
         int current = countAllOccupiedSeats(seats);
         while (previous != current) {
-            previous = current;
             applySeatingRules(seats);
+            previous = current;
             current = countAllOccupiedSeats(seats);
         }
         return current;
+    }
+
+    private static char[][] getMatrixData(String input) {
+        List<String> list = getData(input);
+        char[][] matrix = new char[list.size()][list.get(0).length()];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                matrix[i][j] = list.get(i).charAt(j);
+            }
+        }
+        return matrix;
     }
 
     private static void applySeatingRules(char[][] seats) {
