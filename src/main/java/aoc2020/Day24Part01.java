@@ -12,6 +12,11 @@ public class Day24Part01 extends AdventOfCode {
 
     public static int solve() {
         List<String> flips = getData(FileConstants.AOC_2020_24);
+        Set<String> blackTiles = getBlackTiles(flips);
+        return blackTiles.size();
+    }
+
+    public static Set<String> getBlackTiles(List<String> flips) {
         Set<String> blackTiles = new HashSet<>();
         for (String flip : flips) {
             int[] current = { 0, 0 };
@@ -47,7 +52,7 @@ public class Day24Part01 extends AdventOfCode {
                 blackTiles.remove(key);
             }
         }
-        return blackTiles.size();
+        return blackTiles;
     }
 
     public static void main(String args[]) {
