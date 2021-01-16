@@ -170,4 +170,89 @@ public class AoC2020Test {
     public void day16Part02Test() {
         assertEquals(2325343130651L, Day16Part02.solve());
     }
+
+    @Test
+    public void day17Part01Test() {
+        assertEquals(20091, Day17Part01.solve());
+    }
+
+    @Test
+    public void day17Part02Test() {
+        assertEquals(2325343130651L, Day17Part02.solve());
+    }
+
+    @Test
+    public void day18Part01Test() {
+        assertEquals(20091, Day18Part01.solve());
+    }
+
+    @Test
+    public void day18Part02Test() {
+        assertEquals(2325343130651L, Day16Part02.solve());
+    }
+
+    @Test
+    public void day19Part01Test() {
+        assertEquals(20091, Day19Part01.solve());
+    }
+
+    @Test
+    public void day19Part02Test() {
+        assertEquals(2325343130651L, Day16Part02.solve());
+    }
+
+    @Test
+    public void day20Part01Test() {
+        assertEquals(20091, Day20Part01.solve());
+    }
+
+    @Test
+    public void day20Part02Test() {
+        assertEquals(2325343130651L, Day16Part02.solve());
+    }
+
+    @Test
+    public void day21Part01Test() {
+        assertEquals(20091, Day16Part01.solve());
+    }
+
+    @Test
+    public void day21Part02Test() {
+        assertEquals(2325343130651L, Day16Part02.solve());
+    }
+
+    @Test
+    public void day22Part01Test() {
+        assertEquals(20091, Day16Part01.solve());
+    }
+
+    @Test
+    public void day22Part02Test() {
+        assertEquals(2325343130651L, Day16Part02.solve());
+    }
+
+    @Test
+    public void day23Part01Test() {
+        assertEquals(36472598, Day23Part01.solve());
+    }
+
+    @Test
+    public void day23Part02Test() {
+        assertEquals(90481418730L, Day23Part02.solve());
+    }
+
+    @Test
+    public void day24Part01Test() {
+        assertEquals(488, Day24Part01.solve());
+    }
+
+    @Test
+    public void day24Part02Test() {
+        assertEquals(4118, Day24Part02.solve());
+    }
+
+    @Test
+    public void day25Part01Test() {
+        assertEquals(19924389, Day25Part01.solve());
+    }
 }

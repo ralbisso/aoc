@@ -1,10 +1,18 @@
 package aoc2020;
 
-public class Day18Part02 {
+import java.util.List;
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+import utils.AdventOfCode;
+import utils.FileConstants;
 
+public class Day18Part02 extends AdventOfCode {
+
+    public static int solve() {
+        List<String> list = getData(FileConstants.AOC_2020_18);
+        return 0;
     }
 
+    public static void main(String[] args) {
+        System.out.println("Answer: " + solve());
+    }
 }
