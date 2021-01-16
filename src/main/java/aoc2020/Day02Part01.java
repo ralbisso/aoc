@@ -2,6 +2,8 @@ package aoc2020;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import utils.AdventOfCode;
 import utils.FileConstants;
 
@@ -25,7 +27,7 @@ public class Day02Part01 extends AdventOfCode {
     }
 
     private static boolean isPasswordValid(int lower, int upper, char letter, String toCheck) {
-        int count = (int) toCheck.chars().filter(c -> c == letter).count();
+        int count = StringUtils.countMatches(toCheck, letter);
         return count >= lower && count <= upper;
     }
 
