@@ -9,6 +9,16 @@ import java.util.List;
 
 public class AdventOfCode {
 
+    protected static String getLine(String input) {
+        String line = "";
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(input))) {
+            line = br.readLine();
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+        return line;
+    }
+
     protected static List<String> getData(String input) {
         List<String> data = new ArrayList<>();
         try (BufferedReader br = Files.newBufferedReader(Paths.get(input))) {
