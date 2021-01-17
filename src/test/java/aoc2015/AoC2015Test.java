@@ -55,4 +55,14 @@ public class AoC2015Test {
     public void day05Part02Test() {
         assertEquals(69, Day05Part02.solve());
     }
+
+    @Test
+    public void day06Part01Test() {
+        assertEquals(569999, Day06Part01.solve());
+    }
+
+    @Test
+    public void day06Part02Test() {
+        assertEquals(17836115, Day06Part02.solve());
+    }
 }
