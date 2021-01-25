@@ -18,7 +18,8 @@ public class Day03Part02 extends AdventOfCode {
         for (int i = 0; i < instructions.length(); i++) {
             Day03Part01.moveToNext(instructions.charAt(i), santaCoordinates);
             houses.add(Arrays.toString(santaCoordinates));
-            Day03Part01.moveToNext(instructions.charAt(++i), botCoordinates);
+            i++;
+            Day03Part01.moveToNext(instructions.charAt(i), botCoordinates);
             houses.add(Arrays.toString(botCoordinates));
         }
         return houses.size();
