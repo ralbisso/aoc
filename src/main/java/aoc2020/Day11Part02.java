@@ -21,17 +21,6 @@ public class Day11Part02 extends AdventOfCode {
         return current;
     }
 
-    private static char[][] getMatrixData(String input) {
-        List<String> list = getData(input);
-        char[][] matrix = new char[list.size()][list.get(0).length()];
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                matrix[i][j] = list.get(i).charAt(j);
-            }
-        }
-        return matrix;
-    }
-
     private static void applySeatingRules(char[][] seats) {
         List<int[]> freeToOccupied = new ArrayList<>();
         List<int[]> occupiedToFree = new ArrayList<>();
