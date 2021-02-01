@@ -11,7 +11,7 @@ public class Day01Part02 extends AdventOfCode {
         int position = 0;
         while (floor > -1) {
             char c = instructions.charAt(position);
-            floor += (c == '(') ? 1 : (c == ')') ? -1 : 0;
+            floor += (c == '(') ? 1 : -1;
             position++;
         }
         return position;
