@@ -1,31 +1,39 @@
 package aoc2015;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import utils.AdventOfCode;
 import utils.FileConstants;
 
-public class Day02Part01 extends AdventOfCode {
+public class Day02Part01 {
 
     public static int solve() {
-        List<String> dimensions = getData(FileConstants.AOC_2015_02);
-        int totalSurface = 0;
-        for (String line : dimensions) {
-            int[] sortedDimensions = getDimensions(line);
-            totalSurface += getWrappingPaperSurface(sortedDimensions);
-        }
-        return totalSurface;
+        List<int[]> dimensions = getData(FileConstants.AOC_2015_02);
+        return dimensions.stream().mapToInt(row -> getWrappingPaperSurface(row)).sum();
     }
 
-    static int[] getDimensions(String line) {
-        int[] dimensions = new int[3];
-        String[] split = line.split("x");
-        for (int i = 0; i < dimensions.length; i++) {
-            dimensions[i] = Integer.parseInt(split[i]);
+    static List<int[]> getData(String input) {
+        List<int[]> data = new ArrayList<>();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(input))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] split = line.split("x");
+                int[] dimensions = new int[3];
+                for (int i = 0; i < dimensions.length; i++) {
+                    dimensions[i] = Integer.parseInt(split[i]);
+                }
+                Arrays.sort(dimensions);
+                data.add(dimensions);
+            }
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
         }
-        Arrays.sort(dimensions);
-        return dimensions;
+        return data;
     }
 
     private static int getWrappingPaperSurface(int[] dimensions) {

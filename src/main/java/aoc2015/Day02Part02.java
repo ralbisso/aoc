@@ -2,19 +2,13 @@ package aoc2015;
 
 import java.util.List;
 
-import utils.AdventOfCode;
 import utils.FileConstants;
 
-public class Day02Part02 extends AdventOfCode {
+public class Day02Part02 {
 
     public static int solve() {
-        List<String> dimensions = getData(FileConstants.AOC_2015_02);
-        int totalLength = 0;
-        for (String line : dimensions) {
-            int[] sortedDimensions = Day02Part01.getDimensions(line);
-            totalLength += getRibbonLength(sortedDimensions);
-        }
-        return totalLength;
+        List<int[]> dimensions = Day02Part01.getData(FileConstants.AOC_2015_02);
+        return dimensions.stream().mapToInt(row -> getRibbonLength(row)).sum();
     }
 
     private static int getRibbonLength(int[] dimensions) {
