@@ -14,7 +14,7 @@ public class Day02Part01 {
 
     public static int solve() {
         List<int[]> dimensions = getData(FileConstants.AOC_2015_02);
-        return dimensions.stream().mapToInt(row -> getWrappingPaperSurface(row)).sum();
+        return dimensions.parallelStream().mapToInt(row -> getWrappingPaperSurface(row)).sum();
     }
 
     static List<int[]> getData(String input) {

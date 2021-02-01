@@ -9,13 +9,7 @@ public class Day05Part01 extends AdventOfCode {
 
     public static int solve() {
         List<String> strings = getData(FileConstants.AOC_2015_05);
-        int count = 0;
-        for (String string : strings) {
-            if (isNiceString(string)) {
-                count++;
-            }
-        }
-        return count;
+        return (int) strings.parallelStream().filter(s -> isNiceString(s)).count();
     }
 
     private static boolean isNiceString(String string) {

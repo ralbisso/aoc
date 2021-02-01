@@ -8,7 +8,7 @@ public class Day02Part02 {
 
     public static int solve() {
         List<int[]> dimensions = Day02Part01.getData(FileConstants.AOC_2015_02);
-        return dimensions.stream().mapToInt(row -> getRibbonLength(row)).sum();
+        return dimensions.parallelStream().mapToInt(row -> getRibbonLength(row)).sum();
     }
 
     private static int getRibbonLength(int[] dimensions) {
