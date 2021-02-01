@@ -10,9 +10,8 @@ public class Day01Part02 extends AdventOfCode {
         int floor = 0;
         int position = 0;
         while (floor > -1) {
-            char c = instructions.charAt(position);
+            char c = instructions.charAt(position++);
             floor += (c == '(') ? 1 : -1;
-            position++;
         }
         return position;
     }
