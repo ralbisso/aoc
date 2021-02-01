@@ -10,12 +10,8 @@ public class Day01Part02 extends AdventOfCode {
         int floor = 0;
         int position = 0;
         while (floor > -1) {
-            char instruction = instructions.charAt(position);
-            if (instruction == '(') {
-                floor++;
-            } else if (instruction == ')') {
-                floor--;
-            }
+            char c = instructions.charAt(position);
+            floor += (c == '(') ? 1 : (c == ')') ? -1 : 0;
             position++;
         }
         return position;

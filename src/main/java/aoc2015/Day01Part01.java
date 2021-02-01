@@ -1,7 +1,5 @@
 package aoc2015;
 
-import org.apache.commons.lang3.StringUtils;
-
 import utils.AdventOfCode;
 import utils.FileConstants;
 
@@ -9,9 +7,11 @@ public class Day01Part01 extends AdventOfCode {
 
     public static int solve() {
         String instructions = getLine(FileConstants.AOC_2015_01);
-        int numberOfUps = StringUtils.countMatches(instructions, '(');
-        int numberOfDowns = StringUtils.countMatches(instructions, ')');
-        return numberOfUps - numberOfDowns;
+        int floor = 0;
+        for (char c : instructions.toCharArray()) {
+            floor += (c == '(') ? 1 : (c == ')') ? -1 : 0;
+        }
+        return floor;
     }
 
     public static void main(String[] args) {
